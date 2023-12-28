@@ -14,7 +14,7 @@ class BaseOptions():
         # base define
         parser.add_argument('--name', type=str, default='network_paris', help='name of the experiment.')
         parser.add_argument('--model', type=str, default='tformer', help='name of the model type. [tformer]')
-        parser.add_argument('--mask_type', type=int, default=[2,4],
+        parser.add_argument('--mask_type', nargs='+', type=int, default=[2,4],
                             help='mask type, 0: center mask, 1:random regular mask, '
                             '2: random irregular mask from plc (cvpr 2019). 3: external irregular mask. 4: irregular mask from plc (iccv 2019) [0],[1,2],[2,3]')
         parser.add_argument('--checkpoints_dir', type=str, default='./checkpoints', help='models are save here')
@@ -23,8 +23,8 @@ class BaseOptions():
 
         parser.add_argument('--img_file', type=str, default='/data/paris/val/paris_eval_gt', help='training and testing dataset')
         parser.add_argument('--mask_file', type=str, default='none', help='load test mask')
-        parser.add_argument('--loadSize', type=int, default=[266, 266], help='scale images to this size')
-        parser.add_argument('--fineSize', type=int, default=[256, 256], help='then crop to this size')
+        parser.add_argument('--loadSize', type=int, default=266, help='scale images to this size')
+        parser.add_argument('--fineSize', type=int, default=256, help='then crop to this size')
         parser.add_argument('--resize_or_crop', type=str, default='resize_and_crop', help='scaling and cropping of images at load time [resize_and_crop|crop|]')
         parser.add_argument('--no_flip', action='store_true', help='if specified, do not flip the image for data augmentation')
         parser.add_argument('--no_rotation', action='store_true', help='if specified, do not rotation for data augmentation')
