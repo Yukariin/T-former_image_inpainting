@@ -66,9 +66,9 @@ class CreateDataset(data.Dataset):
             else:
                 mask_index = index
             mask_pil = Image.open(self.mask_paths[mask_index]).convert('L')
-            size = mask_pil.size[0]
-            if size > mask_pil.size[1]:
-                size = mask_pil.size[1]
+            size = mask_pil.size
+            if size > mask_pil.size:
+                size = mask_pil.size
             if self.opt.isTrain:
                 mask_transform = transforms.Compose([transforms.RandomHorizontalFlip(),
                                                      transforms.RandomRotation(10),
@@ -97,8 +97,8 @@ def dataloader(opt):
 def get_transform(opt):
     """Basic process to transform PIL image to torch tensor"""
     transform_list = []
-    osize = [opt.loadSize[0], opt.loadSize[1]]
-    fsize = [opt.fineSize[0], opt.fineSize[1]]
+    osize = [opt.loadSize, opt.loadSize]
+    fsize = [opt.fineSize, opt.fineSize]
     if opt.isTrain:
         if opt.resize_or_crop == 'resize_and_crop':
             transform_list.append(transforms.Resize(osize))
