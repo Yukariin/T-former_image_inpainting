@@ -7,7 +7,7 @@ from einops import rearrange as rearrange
 
 
 def define_g(init_type='normal', gpu_ids=[]):
-    net = Generator(ngf=48)
+    net = Generator(ngf=64)
     return init_net(net, init_type, gpu_ids)
 
 
@@ -18,7 +18,7 @@ def define_d(init_type= 'normal', gpu_ids=[]):
 
 
 class Generator(nn.Module):
-    def __init__(self, ngf=48, num_block=[1,2,3,4], num_head=[1,2,4,8], factor=2.66):
+    def __init__(self, ngf=64, num_block=[1,2,3,4], num_head=[1,2,4,8], factor=2.66):
         super().__init__()
         self.start = nn.Sequential(
             nn.ReflectionPad2d(3),
